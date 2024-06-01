@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import rs.ac.bg.fon.ai.naprednoProgramiranje.user.AppUser;
 import rs.ac.bg.fon.ai.naprednoProgramiranje.user.UserRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -26,5 +27,9 @@ public class NewsletterService {
 
     public Optional<Newsletter> findOne(Long id) {
        return newsletterRepository.findById(id);
+    }
+
+    public List<Newsletter> findAll(){
+        return newsletterRepository.findAll();
     }
 }
