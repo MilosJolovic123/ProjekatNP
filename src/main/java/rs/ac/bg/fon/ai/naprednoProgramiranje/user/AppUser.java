@@ -21,6 +21,6 @@ public class AppUser {
     private String username;
     private String password;
     @OneToMany(mappedBy = "newsletter_user")
-    private Set<Newsletter> predmetSet;
+    private Set<Newsletter> newsletterSet;
 
 }
