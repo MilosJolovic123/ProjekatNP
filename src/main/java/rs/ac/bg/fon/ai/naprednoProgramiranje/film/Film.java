@@ -5,8 +5,10 @@ import jakarta.persistence.*;
 import lombok.*;
 import rs.ac.bg.fon.ai.naprednoProgramiranje.genre.Genre;
 import rs.ac.bg.fon.ai.naprednoProgramiranje.director.Director;
+import rs.ac.bg.fon.ai.naprednoProgramiranje.role.Role;
 
 import java.sql.Date;
+import java.util.Set;
 
 @Entity
 @AllArgsConstructor
@@ -30,4 +32,7 @@ public class Film {
     @JsonIgnore
     @JoinColumn(name ="idGenre")
     private Genre film_genre;
+    @OneToMany(mappedBy = "idRole")
+    private Set<Role> filmSet;
+
 }
