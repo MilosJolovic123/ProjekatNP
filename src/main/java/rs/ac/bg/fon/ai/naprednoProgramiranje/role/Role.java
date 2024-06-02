@@ -1,5 +1,6 @@
 package rs.ac.bg.fon.ai.naprednoProgramiranje.role;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import rs.ac.bg.fon.ai.naprednoProgramiranje.actor.Actor;
@@ -19,9 +20,11 @@ public class Role {
     private String description;
     @ManyToOne
     @JoinColumn(name="idActor")
+    @JsonIgnore
     private Actor actor;
     @ManyToOne
     @JoinColumn(name="idFilm")
+    @JsonIgnore
     private Film film;
 
 }

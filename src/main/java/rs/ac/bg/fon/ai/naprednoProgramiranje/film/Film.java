@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import rs.ac.bg.fon.ai.naprednoProgramiranje.genre.Genre;
 import rs.ac.bg.fon.ai.naprednoProgramiranje.director.Director;
+import rs.ac.bg.fon.ai.naprednoProgramiranje.review.Review;
 import rs.ac.bg.fon.ai.naprednoProgramiranje.role.Role;
 
 import java.sql.Date;
@@ -34,5 +35,7 @@ public class Film {
     private Genre film_genre;
     @OneToMany(mappedBy = "idRole")
     private Set<Role> filmSet;
+    @OneToMany(mappedBy = "idReview")
+    private Set<Review> reviews;
 
 }

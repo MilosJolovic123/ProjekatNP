@@ -3,6 +3,7 @@ package rs.ac.bg.fon.ai.naprednoProgramiranje.user;
 import jakarta.persistence.*;
 import lombok.*;
 import rs.ac.bg.fon.ai.naprednoProgramiranje.newsletter.Newsletter;
+import rs.ac.bg.fon.ai.naprednoProgramiranje.review.Review;
 
 import java.util.Set;
 
@@ -22,5 +23,6 @@ public class AppUser {
     private String password;
     @OneToMany(mappedBy = "newsletter_user")
     private Set<Newsletter> newsletterSet;
-
+    @OneToMany(mappedBy = "idReview")
+    private Set<Review> reviews;
 }
