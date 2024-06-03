@@ -25,4 +25,19 @@ public class UserService {
 
         return user.orElse(null);
     }
+    public AppUser updateUser(AppUser appUser,Long requestedId) {
+
+        AppUser userToUpdate = getUserById(requestedId);
+        userToUpdate.setUsername(appUser.getUsername());
+        userToUpdate.setPassword(appUser.getPassword());
+        userToUpdate.setNameAndLastName(appUser.getNameAndLastName());
+        userToUpdate.setReviews(appUser.getReviews());
+        userToUpdate.setNewsletterSet(appUser.getNewsletterSet());
+
+        return userRepository.save(userToUpdate);
+    }
+    public void deleteUser(Long requestedId) {
+        //AppUser userToDelete = getUserById(requestedId);
+        userRepository.deleteById(requestedId);
+    }
 }

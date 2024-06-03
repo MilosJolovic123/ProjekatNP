@@ -37,6 +37,22 @@ public class ReviewService {
 
         return reviewRepository.save(review);
     }
+    public Review updateReview(Review review, Long requestedId,Long userId,Long filmId){
+        Optional<Review> reviewOptional = reviewRepository.findById(requestedId);
+        Optional<Film> filmOptional = filmRepository.findById(filmId);
+        Optional<AppUser> userOptional = userRepository.findById(userId);
 
+        reviewOptional.get().setFilm(filmOptional.get());
+        reviewOptional.get().setUser(userOptional.get());
+        reviewOptional.get().setComment(review.getComment());
+        reviewOptional.get().setGrade(review.getGrade());
+        reviewOptional.get().setDateGiven(review.getDateGiven());
+
+        return reviewRepository.save(reviewOptional.get());
+
+    }
+    public void DeleteReview(Long requestedId){
+        reviewRepository.deleteById(requestedId);
+    }
 
 }

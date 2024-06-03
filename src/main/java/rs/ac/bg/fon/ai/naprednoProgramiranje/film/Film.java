@@ -34,7 +34,7 @@ public class Film {
     @JoinColumn(name ="idGenre")
     private Genre film_genre;
     @OneToMany(mappedBy = "idRole")
-    private Set<Role> filmSet;
+    private Set<Role> roleSet;
     @OneToMany(mappedBy = "idReview")
     private Set<Review> reviews;
 

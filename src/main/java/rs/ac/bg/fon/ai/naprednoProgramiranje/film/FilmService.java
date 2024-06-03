@@ -37,6 +37,26 @@ public class FilmService {
 
         return filmRepository.save(film);
     }
+    public Film updateFilm(Film film,Long requestedFilm,Long requestedDirector, Long requestedGenre){
+        Optional<Director> directorOptional = directorRepository.findById(requestedDirector);
+        Optional<Genre> genreOptional = genreRepository.findById(requestedGenre);
+
+        Optional<Film> filmToUpdate = filmRepository.findById(requestedFilm);
+
+        filmToUpdate.get().setFilm_director(directorOptional.get());
+        filmToUpdate.get().setFilm_genre(genreOptional.get());
+        filmToUpdate.get().setDateReleased(film.getDateReleased());
+        filmToUpdate.get().setRoleSet(film.getRoleSet());
+        filmToUpdate.get().setDescription(film.getDescription());
+        filmToUpdate.get().setLandOfOrigin(film.getLandOfOrigin());
+        filmToUpdate.get().setTitle(film.getTitle());
+        filmToUpdate.get().setReviews(film.getReviews());
+
+        return filmRepository.save(filmToUpdate.get());
+    }
+    public void FilmDelete(Long requestedId){
+        filmRepository.deleteById(requestedId);
+    }
 
 
 

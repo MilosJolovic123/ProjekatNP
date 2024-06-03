@@ -25,4 +25,13 @@ public class FilmController {
     public ResponseEntity<Film> saveFilm(@RequestBody Film film,@PathVariable Long requestedDirector,@PathVariable Long requestedGenre) {
         return ResponseEntity.ok(filmService.saveFilm(film,requestedDirector,requestedGenre));
     }
+    @PutMapping("film/update/{requestedId}/{requestedDirector}/{requestedGenre}")
+    public ResponseEntity<Film> updateFilm(@RequestBody Film film, @PathVariable Long requestedId, @PathVariable Long requestedDirector, @PathVariable Long requestedGenre){
+        return ResponseEntity.ok(filmService.updateFilm(film,requestedId,requestedDirector,requestedGenre));
+    }
+    @DeleteMapping("film/delete/{requestedId}")
+    public ResponseEntity<Integer> deleteFilm(@PathVariable Long requestedId){
+        filmService.FilmDelete(requestedId);
+        return ResponseEntity.ok(200);
+    }
 }
