@@ -5,6 +5,10 @@ import lombok.*;
 import rs.ac.bg.fon.ai.naprednoProgramiranje.newsletter.Newsletter;
 import rs.ac.bg.fon.ai.naprednoProgramiranje.review.Review;
 
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 import java.util.Set;
 
 @Entity
@@ -14,6 +18,7 @@ import java.util.Set;
 @Setter
 @Builder
 @Table(name = "AppUser")
+
 public class AppUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

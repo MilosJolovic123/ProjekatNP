@@ -7,6 +7,7 @@ import rs.ac.bg.fon.ai.naprednoProgramiranje.film.FilmRepository;
 import rs.ac.bg.fon.ai.naprednoProgramiranje.user.AppUser;
 import rs.ac.bg.fon.ai.naprednoProgramiranje.user.UserRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,12 +21,27 @@ public class ReviewService {
     @Autowired
     private FilmRepository filmRepository;
 
-    public Review getReview(Long requiredId){
-        return reviewRepository.findById(requiredId).get();
+    public ReviewDTO getReview(Long requiredId){
+        Review r= reviewRepository.findById(requiredId).get();
+        ReviewDTO reviewDTO = new ReviewDTO();
+        reviewDTO.setComment(r.getComment());
+        reviewDTO.setGrade(r.getGrade());
+        return reviewDTO;
     }
 
-    public List<Review> getReviews(){
-        return reviewRepository.findAll();
+    public List<ReviewDTO> getReviews(){
+
+        List<Review> reviews = reviewRepository.findAll();
+        List<ReviewDTO> reviewDTOs = new ArrayList<>();
+
+        for(Review r:reviews){
+            ReviewDTO reviewDTO = new ReviewDTO();
+            reviewDTO.setComment(r.getComment());
+            reviewDTO.setGrade(r.getGrade());
+            reviewDTOs.add(reviewDTO);
+        }
+
+        return reviewDTOs;
     }
     public Review saveReview(Review review,Long userId,Long filmId){
 
@@ -56,3 +72,7 @@ public class ReviewService {
     }
 
 }
+
+
+
+

@@ -12,12 +12,12 @@ public class ReviewController {
     @Autowired
     private ReviewService reviewService;
 
-    @GetMapping("/review/{requestedId}")
-    public ResponseEntity<Review> getReview(@PathVariable Long requestedId){
+    @GetMapping("/reviews/{requestedId}")
+    public ResponseEntity<ReviewDTO> getReview(@PathVariable Long requestedId){
         return ResponseEntity.ok(reviewService.getReview(requestedId));
     }
     @GetMapping("/reviews")
-    public ResponseEntity<List<Review>> getReviews(){
+    public ResponseEntity<List<ReviewDTO>> getReviews(){
         return ResponseEntity.ok(reviewService.getReviews());
     }
     @PostMapping("/reviews/add/{filmId}/{userId}")

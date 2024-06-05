@@ -7,6 +7,7 @@ import rs.ac.bg.fon.ai.naprednoProgramiranje.director.DirectorRepository;
 import rs.ac.bg.fon.ai.naprednoProgramiranje.genre.Genre;
 import rs.ac.bg.fon.ai.naprednoProgramiranje.genre.GenreRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,11 +21,31 @@ public class FilmService {
     @Autowired
     private GenreRepository genreRepository;
 
-    public List<Film> getFilmList() {
-        return filmRepository.findAll();
+    public List<FilmDTO> getFilmList() {
+
+        List<Film> films = filmRepository.findAll();
+
+        List<FilmDTO> filmsDTOs = new ArrayList<>();
+
+        for(Film f:films){
+            FilmDTO filmDto = new FilmDTO();
+            filmDto.setDescription(f.getDescription());
+            filmDto.setDateReleased(f.getDateReleased());
+            filmDto.setTitle(f.getTitle());
+            filmDto.setLandOfOrigin(f.getLandOfOrigin());
+            filmsDTOs.add(filmDto);
+        }
+
+        return filmsDTOs;
     }
-    public Film getFilmById(Long id) {
-        return filmRepository.findById(id).get();
+    public FilmDTO getFilmById(Long id) {
+        Film film=filmRepository.findById(id).get();
+        FilmDTO filmDto = new FilmDTO();
+        filmDto.setDescription(film.getDescription());
+        filmDto.setDateReleased(film.getDateReleased());
+        filmDto.setTitle(film.getTitle());
+        filmDto.setLandOfOrigin(film.getLandOfOrigin());
+        return filmDto;
     }
     public Film saveFilm(Film film,Long requestedDirector, Long requestedGenre) {
 

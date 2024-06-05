@@ -14,19 +14,14 @@ public class UserController {
     UserService userService;
 
     @GetMapping("/users/{requiredId}")
-    public ResponseEntity<AppUser> getUser(@PathVariable Long requiredId) {
-
-        Optional<AppUser> user = Optional.ofNullable(userService.getUserById(requiredId));
-
-        if(user.isPresent()) {
-            return ResponseEntity.ok(user.get());
-        }
-        else{
-            return ResponseEntity.notFound().build();
-        }
+    public ResponseEntity<AppUserDTO> getUser(@PathVariable Long requiredId) {
+        Optional<AppUserDTO> user = Optional.ofNullable(userService.getUserById(requiredId));
+        return user.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
+
+
     @GetMapping("/users")
-    public List<AppUser> getUsers() {
+    public List<AppUserDTO> getUsers() {
       return userService.getAllUsers();
     }
 

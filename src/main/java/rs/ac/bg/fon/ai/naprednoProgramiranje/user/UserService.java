@@ -3,6 +3,7 @@ package rs.ac.bg.fon.ai.naprednoProgramiranje.user;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,18 +17,28 @@ public class UserService {
         return userRepository.save(appUser);
     }
 
-    public List<AppUser> getAllUsers() {
-        return userRepository.findAll();
+    public List<AppUserDTO> getAllUsers() {
+        List<AppUser> users = userRepository.findAll();
+
+        List<AppUserDTO> userDTOs = new ArrayList<>();
+
+        for(AppUser u:users){
+            AppUserDTO userDTO = new AppUserDTO();
+            userDTO.setUsername(u.getUsername());
+            userDTOs.add(userDTO);
+        }
+        return userDTOs;
     }
 
-    public AppUser getUserById(Long id) {
+    public AppUserDTO getUserById(Long id) {
         Optional<AppUser> user = userRepository.findById(id);
-
-        return user.orElse(null);
+        AppUserDTO userDTO = new AppUserDTO();
+        userDTO.setUsername(user.get().getUsername());
+        return userDTO;
     }
     public AppUser updateUser(AppUser appUser,Long requestedId) {
 
-        AppUser userToUpdate = getUserById(requestedId);
+        AppUser userToUpdate = userRepository.getById(requestedId);
         userToUpdate.setUsername(appUser.getUsername());
         userToUpdate.setPassword(appUser.getPassword());
         userToUpdate.setNameAndLastName(appUser.getNameAndLastName());

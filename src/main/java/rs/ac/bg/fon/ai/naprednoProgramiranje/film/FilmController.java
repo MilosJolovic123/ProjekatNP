@@ -13,12 +13,12 @@ public class FilmController {
     private FilmService filmService;
 
     @GetMapping("film/{requestedId}")
-    public ResponseEntity<Film> getFilm(@PathVariable("requestedId") Long requestedId) {
+    public ResponseEntity<FilmDTO> getFilm(@PathVariable("requestedId") Long requestedId) {
         return ResponseEntity.ok(filmService.getFilmById(requestedId));
     }
 
     @GetMapping("films")
-    public ResponseEntity<List<Film>> getFilms() {
+    public ResponseEntity<List<FilmDTO>> getFilms() {
         return ResponseEntity.ok(filmService.getFilmList());
     }
     @PostMapping("film/save/{requestedDirector}/{requestedGenre}")
