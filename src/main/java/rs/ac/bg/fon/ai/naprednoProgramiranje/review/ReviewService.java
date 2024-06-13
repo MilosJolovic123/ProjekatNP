@@ -1,6 +1,7 @@
 package rs.ac.bg.fon.ai.naprednoProgramiranje.review;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import rs.ac.bg.fon.ai.naprednoProgramiranje.film.Film;
 import rs.ac.bg.fon.ai.naprednoProgramiranje.film.FilmRepository;
@@ -43,20 +44,22 @@ public class ReviewService {
 
         return reviewDTOs;
     }
-    public Review saveReview(Review review,Long userId,Long filmId){
+    public Review saveReview(Review review, Long filmId, UserDetails loggedUser){
+
+        String username = loggedUser.getUsername();
 
         Optional<Film> filmOptional = filmRepository.findById(filmId);
-        Optional<AppUser> userOptional = userRepository.findById(userId);
+        Optional<AppUser> userOptional = userRepository.findByUsername(username);
 
         review.setFilm(filmOptional.get());
         review.setUser(userOptional.get());
 
         return reviewRepository.save(review);
     }
-    public Review updateReview(Review review, Long requestedId,Long userId,Long filmId){
+    public Review updateReview(Review review, Long requestedId){
         Optional<Review> reviewOptional = reviewRepository.findById(requestedId);
-        Optional<Film> filmOptional = filmRepository.findById(filmId);
-        Optional<AppUser> userOptional = userRepository.findById(userId);
+        //Optional<Film> filmOptional = filmRepository.findById(filmId);
+        //Optional<AppUser> userOptional = userRepository.findById(userId);
 
         //reviewOptional.get().setFilm(filmOptional.get());
         //reviewOptional.get().setUser(userOptional.get());

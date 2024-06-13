@@ -5,6 +5,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.access.prepost.PreFilter;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,15 +30,15 @@ public class ReviewController {
     }
     //moze da doda i user i admin
     @PreAuthorize("hasRole('ADMIN')||hasRole('USER')")
-    @PostMapping("/reviews/add/{filmId}/{userId}")
-    public ResponseEntity<Review> addReview(@RequestBody Review review,@PathVariable Long filmId,@PathVariable Long userId){
-        return ResponseEntity.ok(reviewService.saveReview(review,userId,filmId));
+    @PostMapping("/reviews/add/{filmId}")
+    public ResponseEntity<Review> addReview(@RequestBody Review review, @PathVariable Long filmId, @AuthenticationPrincipal UserDetails loggedUser){
+        return ResponseEntity.ok(reviewService.saveReview(review,filmId,loggedUser));
     }
     //moze da izmeni samo user koji je napravio review!
     @PostAuthorize("returnObject.user.username == authentication.name")
-    @PutMapping("/reviews/update/{requestedId}/{filmId}/{userId}")
-    public Review updateReview(@RequestBody Review review,@PathVariable Long requestedId,@PathVariable Long filmId,@PathVariable Long userId){
-        return reviewService.updateReview(review,requestedId,userId,filmId);
+    @PutMapping("/reviews/update/{requestedId}")
+    public Review updateReview(@RequestBody Review review,@PathVariable Long requestedId){
+        return reviewService.updateReview(review,requestedId);
     }
     //moze da obrise admin ili user koji je dodao!
 
