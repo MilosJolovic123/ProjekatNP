@@ -58,8 +58,8 @@ public class ReviewService {
         Optional<Film> filmOptional = filmRepository.findById(filmId);
         Optional<AppUser> userOptional = userRepository.findById(userId);
 
-        reviewOptional.get().setFilm(filmOptional.get());
-        reviewOptional.get().setUser(userOptional.get());
+        //reviewOptional.get().setFilm(filmOptional.get());
+        //reviewOptional.get().setUser(userOptional.get());
         reviewOptional.get().setComment(review.getComment());
         reviewOptional.get().setGrade(review.getGrade());
         reviewOptional.get().setDateGiven(review.getDateGiven());
@@ -67,8 +67,10 @@ public class ReviewService {
         return reviewRepository.save(reviewOptional.get());
 
     }
-    public void DeleteReview(Long requestedId){
-        reviewRepository.deleteById(requestedId);
+    public Review DeleteReview(Long requestedId){
+        Optional<Review> review = reviewRepository.findById(requestedId);
+         reviewRepository.deleteById(requestedId);
+         return review.get();
     }
 
 }

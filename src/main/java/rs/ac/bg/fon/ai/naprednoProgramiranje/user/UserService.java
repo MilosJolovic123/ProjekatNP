@@ -41,6 +41,7 @@ public class UserService {
         AppUser userToUpdate = userRepository.getById(requestedId);
         userToUpdate.setUsername(appUser.getUsername());
         userToUpdate.setPassword(appUser.getPassword());
+        userToUpdate.setRoles(appUser.getRoles());
         userToUpdate.setNameAndLastName(appUser.getNameAndLastName());
         userToUpdate.setReviews(appUser.getReviews());
         userToUpdate.setNewsletterSet(appUser.getNewsletterSet());

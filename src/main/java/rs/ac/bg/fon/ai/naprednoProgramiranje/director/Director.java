@@ -7,11 +7,11 @@ import rs.ac.bg.fon.ai.naprednoProgramiranje.film.Film;
 import java.util.Set;
 
 @Entity
+@Setter
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Setter
-@Getter
 public class Director {
 
     @Id

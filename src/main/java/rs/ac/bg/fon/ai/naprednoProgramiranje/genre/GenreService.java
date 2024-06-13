@@ -5,8 +5,12 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class GenreService {
+    final GenreRepository genreRepository;
+
     @Autowired
-    GenreRepository genreRepository;
+    public GenreService(GenreRepository genreRepository) {
+        this.genreRepository = genreRepository;
+    }
 
     public Genre saveGenre(Genre genre) {
         return genreRepository.save(genre);

@@ -26,8 +26,19 @@ public class AppUser {
     private String NameAndLastName;
     private String username;
     private String password;
+    private String roles;
     @OneToMany(mappedBy = "newsletter_user")
     private Set<Newsletter> newsletterSet;
     @OneToMany(mappedBy = "idReview")
     private Set<Review> reviews;
+
+
+    public AppUser(String NameAndLastName,String username, String password, String roles) {
+        this.NameAndLastName = NameAndLastName;
+        this.username = username;
+        this.password = password;
+        this.roles = roles;
+    }
+
+
 }

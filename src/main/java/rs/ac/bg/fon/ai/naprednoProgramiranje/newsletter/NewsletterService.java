@@ -2,7 +2,10 @@ package rs.ac.bg.fon.ai.naprednoProgramiranje.newsletter;
 
 import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreFilter;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+import rs.ac.bg.fon.ai.naprednoProgramiranje.UserDetailService.JpaUserDetailsService;
 import rs.ac.bg.fon.ai.naprednoProgramiranje.user.AppUser;
 import rs.ac.bg.fon.ai.naprednoProgramiranje.user.UserRepository;
 
@@ -16,8 +19,12 @@ public class NewsletterService {
     @Autowired
     private NewsletterRepository newsletterRepository;
 
-    public Newsletter save(Newsletter newsletter,Long userId) {
-        Optional<AppUser> user = userRepository.findById(userId);
+
+    public Newsletter save(UserDetails loggedUser, Newsletter newsletter) {
+
+        String username = loggedUser.getUsername();
+
+        Optional<AppUser> user = userRepository.findByUsername(username);
         if (!user.isPresent()) {
             throw new RuntimeException("User not found");
         }
