@@ -1,16 +1,12 @@
 package rs.ac.bg.fon.ai.naprednoProgramiranje.newsletter;
 
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreFilter;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
-import rs.ac.bg.fon.ai.naprednoProgramiranje.UserDetailService.JpaUserDetailsService;
 import rs.ac.bg.fon.ai.naprednoProgramiranje.user.AppUser;
 import rs.ac.bg.fon.ai.naprednoProgramiranje.user.UserRepository;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 

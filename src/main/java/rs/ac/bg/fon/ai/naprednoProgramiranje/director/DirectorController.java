@@ -16,15 +16,16 @@ public class DirectorController {
      * Private field that ensures reference to Service class which is business logic for
      * saving Directors in H2 db.
      */
-    private final DirectorRepository directorRepository;
+    private final DirectorService directorService;
 
     /**
-     * Constructor injection of @DirectorRepository class.
-     * @param directorRepository reference to the @DirectorClass.
+     * Constructor injection of @DirectorService class.
+     * @param directorService reference to the @DirectorService.
      */
     @Autowired
-    public DirectorController(DirectorRepository directorRepository) {
-        this.directorRepository = directorRepository;
+    public DirectorController(DirectorService directorService) {
+        this.directorService = directorService;
+
     }
 
     /**
@@ -37,8 +38,6 @@ public class DirectorController {
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/directors/save")
     public Director addDirector(@RequestBody Director director){
-        if(director.getNoOfOscars()<0)
-            throw new IllegalArgumentException("NO. of Oscars must be greater or equal to 0.");
-        return directorRepository.save(director);
+        return directorService.saveDirector(director);
     }
 }

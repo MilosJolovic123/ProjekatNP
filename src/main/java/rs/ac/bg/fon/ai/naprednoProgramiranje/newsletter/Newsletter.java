@@ -3,9 +3,6 @@ package rs.ac.bg.fon.ai.naprednoProgramiranje.newsletter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
-import org.apache.catalina.User;
-import org.springframework.lang.NonNull;
-import org.springframework.web.bind.annotation.RequestParam;
 import rs.ac.bg.fon.ai.naprednoProgramiranje.user.AppUser;
 
 import java.sql.Date;

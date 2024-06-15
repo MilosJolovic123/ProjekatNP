@@ -6,7 +6,7 @@ import lombok.*;
 import rs.ac.bg.fon.ai.naprednoProgramiranje.actor.Actor;
 import rs.ac.bg.fon.ai.naprednoProgramiranje.film.Film;
 
-import javax.validation.constraints.Size;
+import jakarta.validation.constraints.Size;
 
 /**
  * Role domain class that is associated to an Actor that acts it. It's mapped

@@ -7,7 +7,7 @@ import org.springframework.lang.NonNull;
 import rs.ac.bg.fon.ai.naprednoProgramiranje.film.Film;
 import rs.ac.bg.fon.ai.naprednoProgramiranje.user.AppUser;
 
-import javax.validation.constraints.Size;
+import jakarta.validation.constraints.Size;
 import java.sql.Date;
 
 /**

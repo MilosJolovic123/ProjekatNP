@@ -1,16 +1,12 @@
 package rs.ac.bg.fon.ai.naprednoProgramiranje.user;
-
 import jakarta.persistence.*;
 import lombok.*;
 import rs.ac.bg.fon.ai.naprednoProgramiranje.newsletter.Newsletter;
 import rs.ac.bg.fon.ai.naprednoProgramiranje.review.Review;
-
-import javax.validation.constraints.Size;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import jakarta.validation.constraints.Size;
 import java.util.Set;
+
+
 
 /**
  * AppUser class that maps into AppUser table in H2.

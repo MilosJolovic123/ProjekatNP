@@ -24,6 +24,8 @@ public class UserService {
      * @return User created.
      */
     public AppUser createUser(AppUser appUser) {
+        if(appUser ==null)
+            throw new RuntimeException("The provided app user is null!");
         return userRepository.save(appUser);
     }
 
@@ -51,6 +53,8 @@ public class UserService {
      */
     public AppUserDTO getUserById(Long id) {
         Optional<AppUser> user = userRepository.findById(id);
+        if(user.isEmpty())
+            throw new RuntimeException("The provided user does not exist in H2!");
         AppUserDTO userDTO = new AppUserDTO();
         userDTO.setUsername(user.get().getUsername());
         return userDTO;
@@ -83,7 +87,12 @@ public class UserService {
      * @param requestedId of a user to be retrieved and Deleted
      */
     public void deleteUser(Long requestedId) {
-        //AppUser userToDelete = getUserById(requestedId);
+        Optional<AppUser> userToDelete = userRepository.findById(requestedId);
+        if(userToDelete.isEmpty())
+            throw new RuntimeException("The provided user does not exist in DB!");
         userRepository.deleteById(requestedId);
     }
+
+
+
 }

@@ -61,12 +61,15 @@ public class FilmService {
      * @return Film with film_id id.
      */
     public FilmDTO getFilmById(Long id) {
-        Film film=filmRepository.findById(id).get();
+        Optional<Film> film=filmRepository.findById(id);
+        if(film.isEmpty()){
+            throw new RuntimeException("Film not found!");
+        }
         FilmDTO filmDto = new FilmDTO();
-        filmDto.setDescription(film.getDescription());
-        filmDto.setDateReleased(film.getDateReleased());
-        filmDto.setTitle(film.getTitle());
-        filmDto.setLandOfOrigin(film.getLandOfOrigin());
+        filmDto.setDescription(film.get().getDescription());
+        filmDto.setDateReleased(film.get().getDateReleased());
+        filmDto.setTitle(film.get().getTitle());
+        filmDto.setLandOfOrigin(film.get().getLandOfOrigin());
         return filmDto;
     }
 

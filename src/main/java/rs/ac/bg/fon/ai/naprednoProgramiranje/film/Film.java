@@ -9,7 +9,7 @@ import rs.ac.bg.fon.ai.naprednoProgramiranje.director.Director;
 import rs.ac.bg.fon.ai.naprednoProgramiranje.review.Review;
 import rs.ac.bg.fon.ai.naprednoProgramiranje.role.Role;
 
-import javax.validation.constraints.Size;
+import jakarta.validation.constraints.Size;
 import java.sql.Date;
 import java.util.Set;
 /**
