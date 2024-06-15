@@ -7,16 +7,30 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Service layer that handles all business logic of working with User class.
+ */
 @Service
 public class UserService {
-
+    /**
+     * Reference to the UserRepository.
+     */
     @Autowired
     UserRepository userRepository;
 
+    /**
+     * Method for creation of a User.
+     * @param appUser to be created
+     * @return User created.
+     */
     public AppUser createUser(AppUser appUser) {
         return userRepository.save(appUser);
     }
 
+    /**
+     * Method for retrieval of all Users.
+     * @return list of all Users.
+     */
     public List<AppUserDTO> getAllUsers() {
         List<AppUser> users = userRepository.findAll();
 
@@ -30,24 +44,44 @@ public class UserService {
         return userDTOs;
     }
 
+    /**
+     * Retrieves a specific user.
+     * @param id of a user to be retrieved.
+     * @return User retrieved.
+     */
     public AppUserDTO getUserById(Long id) {
         Optional<AppUser> user = userRepository.findById(id);
         AppUserDTO userDTO = new AppUserDTO();
         userDTO.setUsername(user.get().getUsername());
         return userDTO;
     }
+
+    /**
+     * Method for updating a specific User.
+     * @param appUser carries new info.
+     * @param requestedId user to be updated.
+     * @throws RuntimeException the given user does not exist!
+     * @return newly updated user.
+     */
     public AppUser updateUser(AppUser appUser,Long requestedId) {
 
-        AppUser userToUpdate = userRepository.getById(requestedId);
-        userToUpdate.setUsername(appUser.getUsername());
-        userToUpdate.setPassword(appUser.getPassword());
-        userToUpdate.setRoles(appUser.getRoles());
-        userToUpdate.setNameAndLastName(appUser.getNameAndLastName());
-        userToUpdate.setReviews(appUser.getReviews());
-        userToUpdate.setNewsletterSet(appUser.getNewsletterSet());
+        Optional<AppUser> userToUpdate = userRepository.findById(requestedId);
+        if(userToUpdate.isEmpty())
+            throw new RuntimeException("The given user does not exist!");
+        userToUpdate.get().setUsername(appUser.getUsername());
+        userToUpdate.get().setPassword(appUser.getPassword());
+        userToUpdate.get().setRoles(appUser.getRoles());
+        userToUpdate.get().setNameAndLastName(appUser.getNameAndLastName());
+        userToUpdate.get().setReviews(appUser.getReviews());
+        userToUpdate.get().setNewsletterSet(appUser.getNewsletterSet());
 
-        return userRepository.save(userToUpdate);
+        return userRepository.save(userToUpdate.get());
     }
+
+    /**
+     * Method for deleting a specific user.
+     * @param requestedId of a user to be retrieved and Deleted
+     */
     public void deleteUser(Long requestedId) {
         //AppUser userToDelete = getUserById(requestedId);
         userRepository.deleteById(requestedId);

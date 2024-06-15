@@ -10,21 +10,39 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import rs.ac.bg.fon.ai.naprednoProgramiranje.UserDetailService.JpaUserDetailsService;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Rest controller that ensures GET and POST endpoints of  Newsletter class.
+ */
 @RestController
 public class NewsletterController {
+    /**
+     * Autowired field, reference to the NewsletterService class.
+     */
     @Autowired
     private NewsletterService newsletterService;
     //admin ili user da vidi ako je njegov!
 
+    /**
+     * Secured method for retrieving specific newsletter from H2 db.
+     * @param requestedId  of a newsletter to be found and retrieved from H2.
+     * @return requested newsletter.
+     */
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/newsletter/{requestedId}")
     public Optional<Newsletter> getNewsletter(@PathVariable Long requestedId) {
         return newsletterService.findOne(requestedId);
     }
+
+    /**
+     * Secured method that gets all elements of Newsletter table in H2.
+     * @return ONLY specific newsletter - the ones that belong to the logged user.
+     */
     //moze da vidi user sve svoje newslettere
     @PostFilter("filterObject.newsletter_user.username==authentication.name")
     @GetMapping("/newsletters")
@@ -32,9 +50,17 @@ public class NewsletterController {
         return newsletterService.findAll();
 
     }
+
+    /**
+     * Secured method for applying to the newsletter.
+     * @param loggedUser user currently logged on the API.
+     * @param newsletter specific newsletter to be added.
+     * @return newsletter added.
+     */
     @PreAuthorize("hasRole('ADMIN')||hasRole('USER')")
     @PostMapping("/newsletter/add")
     public ResponseEntity<Newsletter> save(@AuthenticationPrincipal UserDetails loggedUser, @RequestBody Newsletter newsletter) {
+        newsletter.setNewsletter_date(Date.valueOf(LocalDate.now()));
         return ResponseEntity.ok(newsletterService.save(loggedUser,newsletter));
     }
 

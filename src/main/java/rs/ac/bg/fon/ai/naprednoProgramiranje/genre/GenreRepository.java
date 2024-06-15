@@ -4,6 +4,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+/**
+ * Repository interface that extends JpaRepository and ensures CRUD ops with Genre class.
+ */
 @Repository
 public interface GenreRepository extends JpaRepository<Genre, Long> {
 

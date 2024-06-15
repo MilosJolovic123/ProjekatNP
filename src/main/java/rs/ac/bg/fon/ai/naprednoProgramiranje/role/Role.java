@@ -6,6 +6,12 @@ import lombok.*;
 import rs.ac.bg.fon.ai.naprednoProgramiranje.actor.Actor;
 import rs.ac.bg.fon.ai.naprednoProgramiranje.film.Film;
 
+import javax.validation.constraints.Size;
+
+/**
+ * Role domain class that is associated to an Actor that acts it. It's mapped
+ * to Role table in H2 db.
+ */
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
@@ -13,15 +19,34 @@ import rs.ac.bg.fon.ai.naprednoProgramiranje.film.Film;
 @Setter
 @Builder
 public class Role {
+    /**
+     * Unique generated value that serves as an identifier to Role class.
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idRole;
+    /**
+     * Role name represented as a String.
+     */
+    @NonNull
+    @Size(min = 5, max = 50, message = "Role name must be between 5 and 50 characters!")
     private String roleName;
+    /**
+     * Description of a role.
+     */
+    @NonNull
+    @Size(min = 5, max = 50, message = "Description must be between 5 and 50 characters!")
     private String description;
+    /**
+     * Actor that acts the role, direct reference to the Actor table in H2 db.
+     */
     @ManyToOne
     @JoinColumn(name="idActor")
     @JsonIgnore
     private Actor actor;
+    /**
+     * Movie that has this role, direct reference to the Movie table in H2 db.
+     */
     @ManyToOne
     @JoinColumn(name="idFilm")
     @JsonIgnore

@@ -9,10 +9,15 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import rs.ac.bg.fon.ai.naprednoProgramiranje.user.AppUser;
 import rs.ac.bg.fon.ai.naprednoProgramiranje.user.UserRepository;
 
-
+/**
+ * Our Spring app :D
+ */
 @SpringBootApplication
 public class NaprednoProgramiranjeApplication {
-
+	/**
+	 * Entry point of the app :D
+	 * @param args args
+	 */
 	public static void main(String[] args) {
 
 		SpringApplication.run(NaprednoProgramiranjeApplication.class, args);

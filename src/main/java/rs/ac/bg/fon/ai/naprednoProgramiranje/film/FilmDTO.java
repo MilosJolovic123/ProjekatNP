@@ -4,14 +4,29 @@ import lombok.*;
 
 import java.sql.Date;
 
+/**
+ * DTO class for a film and representing it.
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 public class FilmDTO {
+    /**
+     * Date that the film was released.
+     */
     private Date dateReleased;
+    /**
+     * Title of the film.
+     */
     private String title;
+    /**
+     * Description of the film
+     */
     private String description;
+    /**
+     *Film land of origin of.
+     */
     private String landOfOrigin;
 }
